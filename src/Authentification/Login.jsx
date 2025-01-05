@@ -1,11 +1,35 @@
 import Navbar from "../Components/Nav";
+import { useState } from 'react';
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 import logosm from "../img/logo-sm.png";
 import google from "../img/google icon.png";
 import background from "../img/bg-icon.jpg";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../features/auth/authSlice';
 
 const Login = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { loading, error } = useSelector((state) => state.auth);
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: ''
+    });
+    const handleChange = (e) => {
+        setCredentials({
+            ...credentials,
+            [e.target.id]: e.target.value
+        });
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const result = await dispatch(login(credentials));
+        if (!result.error) {
+            navigate('/');
+        }
+    };
+
     return (
       
 <>
@@ -23,31 +47,44 @@ const Login = () => {
                     Connectez-vous à votre compte
                 </h1>
                 <h2>
-                    Vous n'avez pas de compte ? <a href="" className="font-semibold hover:underline text-orange-600">S'inscrire</a>
+                    Vous n'avez pas de compte ? <a onClick={()=>navigate('/register')} className="font-semibold hover:underline text-orange-600 cursor-auto" >S'inscrire</a>
                 </h2>
             </div>
 
             <div className="flex p-8 flex-col col-span-3 items-center justify-center rounded bg-gray-50 dark:bg-gray-800 w-full">
                 <div className="px-20">
                     <h1 className="text-center text-xl font-semibold my-6">Connectez-vous rapidement avec votre numéro de téléphone ou e-mail</h1>
-                    <form className="flex flex-col gap-4 w-full">
+                    {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+                    <form className="flex flex-col gap-4 w-full"  onSubmit={handleSubmit}>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="email1" value="Numéro de téléphone ou e-mail" />
                             </div>
-                            <TextInput id="email1" type="email" placeholder="" required />
+                            <TextInput
+                                        id="email"
+                                        type="email"
+                                        required
+                                        onChange={handleChange}
+                                    />
                         </div>
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="password1" value="Mot de passe" />
                             </div>
-                            <TextInput id="password1" type="password" required />
+                            <TextInput
+                                        id="password"
+                                        type="password"
+                                        required
+                                        onChange={handleChange}
+                                    />
                         </div>
-                        <Button type="submit" className="bg-orange-500 hover:bg-orange-900">Se connecter</Button>
+                        <Button type="submit" className="bg-orange-500 hover:bg-orange-900"                                     disabled={loading}
+                        >                                    {loading ? 'Connexion...' : 'Se connecter'}
+</Button>
                     </form>
 
-                    <div class="inline-flex items-center justify-center w-full">
-                        <hr class="w-64 h-px bg-gray-200 border-0 dark:bg-gray-700" />
+                    <div className="inline-flex items-center justify-center w-full">
+                        <hr className="w-64 h-px bg-gray-200 border-0 dark:bg-gray-700" />
                     </div>
 
                     <div className="flex flex-col w-full items-center justify-center">
