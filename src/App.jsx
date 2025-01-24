@@ -13,6 +13,7 @@ import Pindex from "./Provider/Pindex";
 import Service from "./Provider/Service";
 
 
+
 export default function App() {
   return (
     <Routes>
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="pindex" element={<Pindex />} />
         <Route path="emailus" element={<EmailUs />} />
         <Route path="service" element={<Service />} />
+
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
