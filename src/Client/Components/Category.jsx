@@ -9,13 +9,13 @@ export default function Category() {
         {[
           {
             src: "/src/img/cleaning.png",
-            label: "Services Ménagers ",
-            link: "/camera",
+            label: "Services Ménagers",
+            link: "/Cservice",
           },
           {
             src: "/src/img/bricolage.png",
-            label: "Services de Bricolage ",
-            link: "/bikes",
+            label: "Services de Bricolage",
+            link: "/Cservice",
           },
           {
             src: "/src/img/education.png",
@@ -63,7 +63,7 @@ export default function Category() {
               <img
                 src={item.src}
                 alt={item.label}
-                className="mx-auto w-2/3 hover:opacity-80 rounded-full transition-opacity"
+                className="mx-auto w-2/3 hover:opacity-80 hover:p-1 rounded-full shadow-md transition-opacity"
               />
               <p className="mt-2 font-bold text-gray-900">{item.label}</p>
             </a>

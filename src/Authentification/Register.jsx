@@ -4,7 +4,7 @@ import logosm from "../img/logo-sm.png";
 import background from "../img/bg-icon.jpg";
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../features/auth/authSlice';
 
 const Register = () => {
@@ -105,7 +105,7 @@ const Register = () => {
                                     
                                     <div className="flex items-center gap-2">
                                         <Checkbox id="remember" />
-                                        <Label htmlFor="remember">J'accepte <a href="" className="text-orange-500 hover:underline hover:text-orange-800">les conditions d'utilisation</a></Label>
+                                        <Label htmlFor="remember">J'accepte <a href="/Terms" target="_blank" className="text-orange-500 hover:underline hover:text-orange-800">les conditions d'utilisation</a></Label>
                                     </div>
                                     <Button
                                         type="submit"

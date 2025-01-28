@@ -1,13 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from "/src/img/logo-W.png";
+import logo from "/src/img/logo.png";
+import footer from "/src/img/footer.png";
 
 export default function Footer() {
     return (
         <div>
 
-            <footer className="bg-orange-500 text-white dark:bg-gray-900 dark:text-white">
-                <div className="container mx-auto py-10">
+<footer className="flex items-center justify-center rounded-xl text-gray-900"
+                    style={{
+                        backgroundImage: `url(${footer})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                    }}>
+                        
+                    <div className="container mx-auto py-10">
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
@@ -83,12 +90,13 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="bg-gray-900 text-center py-4 dark:bg-gray-800">
+                
+            </footer>
+            <div className="bg-gray-900 text-center py-4 dark:bg-gray-800">
                     <div className="items-center justify-center">
                         <p className="text-sm dark:text-gray-300">&copy; 2025, All Rights Reserved <Link to="/" className="text-orange-500 dark:text-orange-400">anas ali ilyas</Link></p>
                     </div>
                 </div>
-            </footer>
         </div>
     )
 }

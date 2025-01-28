@@ -11,11 +11,12 @@ import Cindex from "./Client/Cindex";
 import EmailUs from "./Client/EmailUs";
 import Pindex from "./Provider/Pindex";
 import Service from "./Provider/Service";
-
-
+import Cservice from "./Client/Cservice";
+import Terms from "./Authentification/Terms";
 
 export default function App() {
   return (
+    
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
@@ -28,9 +29,11 @@ export default function App() {
         <Route path="pindex" element={<Pindex />} />
         <Route path="emailus" element={<EmailUs />} />
         <Route path="service" element={<Service />} />
-
+        <Route path="cservice" element={<Cservice />} />
+        <Route path="terms" element={<Terms />} />
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>
+
   );
 } 

@@ -1,26 +1,39 @@
+import { useState } from "react";
 import Provider_Nav from "./Components/Provider_Nav";
 import { Label, Select } from "flowbite-react";
-import LocationInput from "./Components/Localisation";
 
 const Service = () => {
+  const [showDocumentInput, setShowDocumentInput] = useState(false);
+
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+    if (
+      selectedCategory === "Soutien Scolaire et Coaching" ||
+      selectedCategory === "Services pour Enfants"
+    ) {
+      setShowDocumentInput(true);
+    } else {
+      setShowDocumentInput(false);
+    }
+  };
+
   return (
     <>
       <Provider_Nav />
       <div className="flex items-center justify-center mt-20 p-4 bg-gray-50">
         <div className="grid grid-cols-7 gap-4 w-4/5">
-
           <div className="col-span-5 bg-white p-8 shadow-md rounded-xl">
             <h2 className="text-xl font-bold mb-4">Qu'annoncez-vous aujourd'hui ?</h2>
             <p className="text-gray-600 mb-6">
               Grâce à ces informations, les acheteurs peuvent trouver votre annonce plus facilement.
             </p>
-            <form action="">
-
+            <form>
+              {}
               <div className="w-full mb-4">
                 <div className="mb-2 block">
                   <Label htmlFor="Catégories" value="Catégories*" />
                 </div>
-                <Select id="Catégories" required>
+                <Select id="Catégories" required onChange={handleCategoryChange}>
                   <option>Services Ménagers</option>
                   <option>Services de Bricolage</option>
                   <option>Soutien Scolaire et Coaching</option>
@@ -34,11 +47,12 @@ const Service = () => {
                 </Select>
               </div>
 
+              {}
               <div className="w-full mb-4">
                 <div className="mb-2 block">
-                  <Label htmlFor="Sous catégories" value="Sous Catégories*" />
+                  <Label htmlFor="Services" value="Services*" />
                 </div>
-                <Select id="Sous catégories" required>
+                <Select id="Services" required>
                   <option>Service</option>
                   <option>Services Ménagers</option>
                   <option>Services de Bricolage</option>
@@ -53,8 +67,21 @@ const Service = () => {
                 </Select>
               </div>
 
+              {}
+              {showDocumentInput && (
+                <div className="w-full mb-4">
+                  <div className="mb-2 block">
+                    <Label htmlFor="document" value="Veuillez insérer un document (CV, certificat, etc.)*" />
+                  </div>
+                  <input
+                    type="file"
+                    id="document"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"                    required
+                  />
+                </div>
+              )}
 
-
+              {}
               <h2 className="text-xl font-bold mb-4">Votre Adresse</h2>
               <p className="text-gray-600 mb-6">Adresse principale de l'annonce</p>
 
@@ -98,15 +125,6 @@ const Service = () => {
 
               <h2 className="text-xl font-bold mb-4">Information de l'annonce</h2>
               <p className="text-gray-600 mb-6">Ajouter plus de détails sur votre annonce pour un maximum de visbilité</p>
-              
-              <div className="w-full mb-4">
-                <div className="mb-2 block">
-                  <Label value="Titre de l'annonce*" />
-                </div>
-                <div className="relative">
-                <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Services de Jardinage" required />
-                </div>
-              </div>
 
               <div className="w-full mb-4">
                 <div className="mb-2 block">
@@ -127,17 +145,11 @@ const Service = () => {
                 </div>
               </div>
 
-
+              <button type="button" class="focus:outline-none w-full text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900">Publier</button>
 
             </form>
 
 
-            <div className="w-full">
-              <div className="mb-2 block">
-                <Label value="Localisation*" />
-              </div>
-              <LocationInput />
-            </div>
           </div>
 
 
