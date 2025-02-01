@@ -50,6 +50,8 @@ const ServiceDetails = () => {
               <div className='flex flex-row p-2 text-orange-600 font-semibold items-center justify-center'>
                 <p className='rounded-full bg-white py-2 px-4 mr-3'>Age: <span className='font-bold'>{provider.age}</span></p>
                 <p className='rounded-full bg-white py-2 px-4'>Sexe: <span className='font-bold'>{provider.sexe}</span></p>
+                <p className='rounded-full bg-white py-2 px-4 ml-3'>Secteur: <span className='font-bold'>{provider.secteur}</span></p>
+                
               </div>
             </div>
           </div>
