@@ -63,10 +63,8 @@ function ScrollableCards() {
             }}
           >
             {services.map((service) => (
-              <Link to="/servicedetails"
-                key={service.id}
-                className="w-1/5 flex-shrink-0 m-2 bg-white transform hover:scale-105 transition-transform hover:bg-gray-50 rounded-xl p-4 border shadow-md"
-              >
+              <Link to={`/servicedetails/${service.provider.id}`} key={service.id} 
+              className="w-1/5 flex-shrink-0 m-2 bg-white transform hover:scale-105 transition-transform hover:bg-gray-50 rounded-xl p-4 border shadow-md">
                 {/* Provider Name + Service Name */}
                 <div className="flex flex-row justify-between px-4 mb-4 items-center">
                   <h4 className="text-lg font-bold text-gray-900">
