@@ -64,6 +64,11 @@ export default function App() {
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="historique" element={<Historique />} />
 
+
+
+          <Route path="/" element={<ServiceList />} />
+          <Route path="/editservice/:id" element={<EditService />} />
+
           {/* Add HomeCard and ServiceDetails routes */}
           <Route path="homecard" element={<HomeCard />} /> {/* Route for HomeCard */}
           <Route path="homecard1" element={<HomeCard1 />} /> {/* Route for HomeCard1 */}
