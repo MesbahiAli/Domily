@@ -22,54 +22,54 @@ export default function Category() {
         <div className="flex flex-wrap justify-around items-center mt-8">
           {[
             {
-              src: "/src/img/clean.png",
+              src: "/src/img/categories1.png",
               label: "Services Ménagers",
-              link: "/Pservice/menagers", // URL-friendly
+              link: "/Cservice/menagers", // URL-friendly
             },
             {
-              src: "/src/img/brico.png",
+              src: "/src/img/categories2.png",
               label: "Services de Bricolage",
-              link: "/Pservice/bricolage", // URL-friendly
+              link: "/Cservice/bricolage", // URL-friendly
             },
             {
-              src: "/src/img/edu.png",
+              src: "/src/img/categories3.png",
               label: "Soutien Scolaire et Coaching",
-              link: "/Pservice/scolaire", // URL-friendly
+              link: "/Cservice/scolaire", // URL-friendly
             },
             {
-              src: "/src/img/garden.png",
+              src: "/src/img/categories4.png",
               label: "Services de Jardinage",
-              link: "/Pservice/jardinage", // URL-friendly
+              link: "/Cservice/jardinage", // URL-friendly
             },
             {
-              src: "/src/img/well.png",
+              src: "/src/img/categories5.png",
               label: "Services de Bien-Être",
-              link: "/Pservice/bien-etre", // URL-friendly
+              link: "/Cservice/bien-etre", // URL-friendly
             },
             {
-              src: "/src/img/kid.png",
+              src: "/src/img/categories6.png",
               label: "Services pour Enfants",
-              link: "/Pservice/enfants", // URL-friendly
+              link: "/Cservice/enfants", // URL-friendly
             },
             {
-              src: "/src/img/oold.png",
+              src: "/src/img/categories7.png",
               label: "Services pour Personnes Âgées",
-              link: "/Pservice/personnes-agees", // URL-friendly
+              link: "/Cservice/personnes-agees", // URL-friendly
             },
             {
-              src: "/src/img/elect.png",
+              src: "/src/img/categories8.png",
               label: "Services Technologiques",
-              link: "/Pservice/technologiques", // URL-friendly
+              link: "/Cservice/technologiques", // URL-friendly
             },
             {
-              src: "/src/img/livraison.png",
+              src: "/src/img/categories9.png",
               label: "Transport et Livraison",
-              link: "/Pservice/transport", // URL-friendly
+              link: "/Cservice/transport", // URL-friendly
             },
             {
-              src: "/src/img/pett.png",
+              src: "/src/img/categories10.png",
               label: "Services Animaliers",
-              link: "/Pservice/animaliers", // URL-friendly
+              link: "/Cservice/animaliers", // URL-friendly
             },
           ].map((item, index) => (
             <div key={index} className="w-1/5 p-4 text-center">

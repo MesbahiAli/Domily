@@ -19,56 +19,56 @@ export default function Category() {
         </h1>
         <div className="flex flex-wrap justify-around items-center mt-8">
           {[
-            {
-              src: "/src/img/clean.png",
-              label: "Services Ménagers",
-              link: "/Eservice/menagers",
-            },
-            {
-              src: "/src/img/brico.png",
-              label: "Services de Bricolage",
-              link: "/Eservice/bricolage",
-            },
-            {
-              src: "/src/img/edu.png",
-              label: "Soutien Scolaire et Coaching",
-              link: "/Eservice/scolaire",
-            },
-            {
-              src: "/src/img/garden.png",
-              label: "Services de Jardinage",
-              link: "/Eservice/jardinage",
-            },
-            {
-              src: "/src/img/well.png",
-              label: "Services de Bien-Être",
-              link: "/Eservice/bien-etre",
-            },
-            {
-              src: "/src/img/kid.png",
-              label: "Services pour Enfants",
-              link: "/Eservice/enfants",
-            },
-            {
-              src: "/src/img/oold.png",
-              label: "Services pour Personnes Âgées",
-              link: "/Eservice/personnes-agees",
-            },
-            {
-              src: "/src/img/elect.png",
-              label: "Services Technologiques",
-              link: "/Eservice/technologiques",
-            },
-            {
-              src: "/src/img/livraison.png",
-              label: "Transport et Livraison",
-              link: "/Eservice/transport",
-            },
-            {
-              src: "/src/img/pett.png",
-              label: "Services Animaliers",
-              link: "/Eservice/animaliers",
-            },
+                        {
+                          src: "/src/img/categories1.png",
+                          label: "Services Ménagers",
+                          link: "/Cservice/menagers", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories2.png",
+                          label: "Services de Bricolage",
+                          link: "/Cservice/bricolage", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories3.png",
+                          label: "Soutien Scolaire et Coaching",
+                          link: "/Cservice/scolaire", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories4.png",
+                          label: "Services de Jardinage",
+                          link: "/Cservice/jardinage", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories5.png",
+                          label: "Services de Bien-Être",
+                          link: "/Cservice/bien-etre", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories6.png",
+                          label: "Services pour Enfants",
+                          link: "/Cservice/enfants", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories7.png",
+                          label: "Services pour Personnes Âgées",
+                          link: "/Cservice/personnes-agees", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories8.png",
+                          label: "Services Technologiques",
+                          link: "/Cservice/technologiques", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories9.png",
+                          label: "Transport et Livraison",
+                          link: "/Cservice/transport", // URL-friendly
+                        },
+                        {
+                          src: "/src/img/categories10.png",
+                          label: "Services Animaliers",
+                          link: "/Cservice/animaliers", // URL-friendly
+                        },
           ].map((item, index) => (
             <div key={index} className="w-1/5 p-4 text-center">
               <Link to={item.link}>

@@ -9,6 +9,8 @@ const Service = () => {
     name: "", 
     description: "",
     price: "",
+    imgPath: "",
+    image: null
   });
 
   const handleCategoryChange = (e) => {
@@ -36,12 +38,14 @@ const Service = () => {
     e.preventDefault();
   
     // Prepare the data as JSON
+    const defaultImage = `/src/img/pett${formData.category_id}.png`;
     const data = {
       name: formData.name,
       description: formData.description,
       price: parseFloat(formData.price), // Ensure price is a number
       provider_id: 3, // Hardcoded provider_id
       category_id: parseInt(formData.category_id, 10), // Ensure category_id is a number
+      imgPath: defaultImage 
     };
   
     console.log("Request data:", data);
@@ -113,6 +117,7 @@ const Service = () => {
                 <div className="mb-2 block">
                   <Label htmlFor="name" value="Services*" /> {/* Changed from "service" to "name" */}
                 </div>
+                
                 <input
                   type="text"
                   id="name" // Changed from "service" to "name"
@@ -121,6 +126,22 @@ const Service = () => {
                   onChange={handleInputChange}
                 />
               </div>
+              <div className="w-full mb-4">
+  <Label htmlFor="image" value="Image du service" />
+  <input
+    type="file"
+    id="image"
+    accept="image/*"
+    onChange={(e) => {
+      setFormData({
+        ...formData,
+        image: e.target.files[0],
+        imgPath: URL.createObjectURL(e.target.files[0])
+      });
+    }}
+    className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg"
+  />
+</div>
 
               {showDocumentInput && (
                 <div className="w-full mb-4">
