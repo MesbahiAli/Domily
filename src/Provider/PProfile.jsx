@@ -58,7 +58,7 @@ const PProfile = () => {
                     <h2 className='font-bold text-2xl mb-3'>Secteur </h2>
                     <p className='mb-3'>{userData.secteur}</p>
                         <h2 className='font-bold text-2xl mb-3'>A propos de moi</h2>
-                        <p className='mb-3'>{userData.about}</p>
+                        <p className='mb-3 max-h-24 overflow-y-auto'>{userData.about}</p>
 
                         <h2 className='font-bold text-2xl mb-3'>Notation</h2>
                         <div className="flex items-center mb-3">

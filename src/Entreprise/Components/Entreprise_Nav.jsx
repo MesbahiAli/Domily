@@ -17,12 +17,12 @@ const Entreprise_Nav = () => {
         </div>
 
         <Navbar.Collapse >
-        <Navbar.Link href="Pindex" className="text-orange-700 font-semibold ">
+        <Navbar.Link href="Eindex" className="text-orange-700 font-semibold ">
         Accueil 
         </Navbar.Link>
-        <Navbar.Link href="#" className="text-orange-700 font-semibold ">Mes offres</Navbar.Link>
-        <Navbar.Link href="EmailP" className="text-orange-700 font-semibold ">Contact</Navbar.Link>
-        <Navbar.Link href="PProfile" className="text-orange-700 font-semibold ">Profile</Navbar.Link>
+        <Navbar.Link href="EservicesListe" className="text-orange-700 font-semibold ">Mes offres</Navbar.Link>
+        <Navbar.Link href="EmailE" className="text-orange-700 font-semibold ">Contact</Navbar.Link>
+        <Navbar.Link href="EProfile" className="text-orange-700 font-semibold ">Profile</Navbar.Link>
       </Navbar.Collapse>
       </Navbar>
       

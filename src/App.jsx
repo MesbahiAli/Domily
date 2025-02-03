@@ -13,17 +13,25 @@ import EmailP from "./Provider/EmailP";
 import Pindex from "./Provider/Pindex";
 import Service from "./Provider/Service";
 import Cservice from "./Client/Cservice";
+import Pservice from "./Provider/Pservice";
+import Eservice from "./Entreprise/Eservice";
 import Terms from "./Authentification/Terms";
 import Profile from "./Client/Profile";
 import PProfile from "./Provider/PProfile";
 import Eindex from "./Entreprise/Eindex";
 import EmailE from "./Entreprise/EmailE";
+
 import ServiceList from "./Provider/ServiceList";
+import EservicesListe from "./Entreprise/EServicesListe";
+
+
 import EditService from "./Provider/EditService";
+import EeditService from "./Entreprise/EEditServices";
 import EditPProfile from "./Provider/EditPProfile";
 import EditProfile from "./Client/EditProfile";
 import Historique from "./Client/Historique";
 import ServiceDetails from "./Client/ServiceDetails";
+
 import HomeCard from "./Client/Components/HomeCard"; 
 import HomeCard1 from "./Client/Components/HomeCard1"; 
 import HomeCard2 from "./Client/Components/HomeCard2"; 
@@ -34,6 +42,18 @@ import HomeCard6 from "./Client/Components/HomeCard6";
 import HomeCard7 from "./Client/Components/HomeCard7"; 
 import HomeCard8 from "./Client/Components/HomeCard8"; 
 import HomeCard9 from "./Client/Components/HomeCard9"; 
+
+import Category from "./Client/Components/Category";
+import Ecategory from "./Entreprise/Components/Category";
+
+
+
+import EProfile from "./Entreprise/EProfile";
+import EditEProfile from "./Entreprise/EditEProfile";
+import ServicesListe from "./Entreprise/EServicesListe";
+import CreateService from "./Entreprise/CreateService";
+import EditServices from "./Entreprise/EEditServices";
+
 
 
 export default function App() {
@@ -55,19 +75,40 @@ export default function App() {
           <Route path="emaile" element={<EmailE />} />
           <Route path="service" element={<Service />} />
           <Route path="cservice" element={<Cservice />} />
+          <Route path="pservice" element={<Pservice />} />
+
+          <Route path="eservice" element={<Eservice />} />
           <Route path="terms" element={<Terms />} />
           <Route path="profile" element={<Profile />} />
           <Route path="pprofile" element={<PProfile />} />
           <Route path="serviceList" element={<ServiceList />} />
+          <Route path="eservicesListe" element={<EservicesListe />} />
+       
           <Route path="editservice" element={<EditService />} />
+          <Route path="eeditservice" element={<EeditService />} />
           <Route path="editpprofile" element={<EditPProfile />} />
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="historique" element={<Historique />} />
+
+          <Route path="/" element={<Category />} />
+          <Route path="/Cservice/:category" element={<Cservice />} /> {/* Dynamic route */}
+
+          <Route path="/" element={<Category />} />
+          <Route path="/Pservice/:category" element={<Pservice />} /> {/* Dynamic route */}
+
+          <Route path="/" element={<Ecategory />} />
+          <Route path="/Eservice/:category" element={<Eservice />} /> {/* Dynamic route */}
 
 
 
           <Route path="/" element={<ServiceList />} />
           <Route path="/editservice/:id" element={<EditService />} />
+
+          <Route path="/" element={<EservicesListe />} />
+          <Route path="/eeditservice/:id" element={<EeditService />} />
+
+
+          
 
           {/* Add HomeCard and ServiceDetails routes */}
           <Route path="homecard" element={<HomeCard />} /> {/* Route for HomeCard */}
@@ -80,6 +121,20 @@ export default function App() {
           <Route path="homecard7" element={<HomeCard7 />} /> {/* Route for HomeCard7 */}
           <Route path="homecard8" element={<HomeCard8 />} /> {/* Route for HomeCard8 */}
           <Route path="homecard9" element={<HomeCard9 />} /> {/* Route for HomeCard9 */}
+
+        <Route path="eprofile" element={<EProfile />} />
+        <Route path="editeprofile" element={<EditEProfile />} />
+
+     
+        <Route path="servicesliste" element={<ServicesListe />} />
+  
+        
+        <Route path="createservice" element={<CreateService />} />
+        <Route path="editservices" element={<EditServices />} />
+
+
+
+
 
 
           <Route path="servicedetails/:id" element={<ServiceDetails />} /> {/* Dynamic route for ServiceDetails */}
