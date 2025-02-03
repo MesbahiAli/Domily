@@ -55,6 +55,14 @@ import CreateService from "./Entreprise/CreateService";
 import EditServices from "./Entreprise/EEditServices";
 
 
+import Aindex from "./Admin/Aindex";
+import AProfile from "./Admin/AProfile";
+import EditAprofile from "./Admin/EditAprofile";
+import Gestion_Client from "./Admin/Gestion_Client";
+import Gestion_Provider from "./Admin/Gestion_Provider";
+import Gestion_Entreprise from "./Admin/Gestion_Entreprise";
+
+
 
 export default function App() {
   return (
@@ -89,6 +97,17 @@ export default function App() {
           <Route path="editpprofile" element={<EditPProfile />} />
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="historique" element={<Historique />} />
+
+
+
+
+        <Route path="aindex" element={<Aindex />} />
+        <Route path="aprofile" element={<AProfile />} />
+        <Route path="editaprofile" element={<EditAprofile />} />
+        <Route path="gestionclient" element={<Gestion_Client />} />
+        <Route path="gestionprovider" element={<Gestion_Provider />} />
+        <Route path="gestionentreprise" element={<Gestion_Entreprise />} />
+
 
           <Route path="/" element={<Category />} />
           <Route path="/Cservice/:category" element={<Cservice />} /> {/* Dynamic route */}
