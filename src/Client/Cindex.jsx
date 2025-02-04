@@ -13,6 +13,7 @@ import HomeCard7 from "./Components/HomeCard7";
 import HomeCard8 from "./Components/HomeCard8";
 import HomeCard9 from "./Components/HomeCard9";
 import Footer from "./Components/Footer";
+import ServiceCard from "./Components/ServiceCard";
 
 
 const Cindex = () => {
@@ -21,40 +22,81 @@ const Cindex = () => {
 
   const handleClose = () => setIsOpen(false);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) return;
+    
+    setIsSearching(true);
+    try {
+      const response = await fetch(`http://localhost:8081/api/services/search?query=${searchQuery}`);
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsSearching(false);
+  };
+
+  
+  const categories = [
+    { id: 1, title: "Services Ménagers" },
+    { id: 2, title: "Services de Bricolage" },
+    { id: 3, title: "Soutien Scolaire et Coaching" },
+    { id: 4, title: "Services de Jardinage" },
+    { id: 5, title: "Services de Bien-Être" },
+    { id: 6, title: "Services pour Enfants" },
+    { id: 7, title: "Services pour Personnes Âgées" },
+    { id: 8, title: "Services Technologiques" },
+    { id: 9, title: "Transport et Livraison" },
+    { id: 10, title: "Services Animaliers" }
+  ];
   return (
     <div className="flex flex-col w-full bg-gray-50">
       <Client_Nav />
 
       <Navbar fluid className="fixed flex flex-col justify-center items-center top-20 -mt-2 z-50 w-full shadow-md">
-        <Navbar.Toggle />
-        <div className="flex justify-center items-center w-full">
-          <div className="relative">
-            <input type="text" id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-            <label htmlFor="floating_outlined" className="absolute text-sm text-gray-500 dark:text-gray-300 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-orange-600 peer-focus:dark:text-white peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Que rechercher-vous?</label>
-          </div>
-
-          <button type="submit" className="inline-flex items-center justify-center py-3.5 px-3 text-sm font-medium text-white bg-orange-500 rounded-r-full rounded-l-lg border border-orange-50 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-700 dark:focus:ring-blue-800">
-            <svg className="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>Rechercher
-          </button>
-        </div>
-      </Navbar>
+       <div className="flex justify-center items-center w-full">
+         <div className="relative">
+           <input 
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
+             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+             className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1"
+             placeholder="Que rechercher-vous?"
+           />
+         </div>
+         <button onClick={handleSearch} className="inline-flex items-center py-3.5 px-3 bg-orange-500 rounded-r-full">
+           <svg className="w-4 h-4 me-2" fill="none" viewBox="0 0 20 20">
+             <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+           </svg>
+           {isSearching ? 'Recherche...' : 'Rechercher'}
+         </button>
+       </div>
+     </Navbar>
 
 
       <div className="mt-40">
-        <Category />
-        <hr class="w-48 h-1 mx-auto mb-4 bg-orange-200 border-0 rounded md:my-10 dark:bg-gray-700" />
-        <HomeCard />
-        <HomeCard1 />
-        <HomeCard2 />
-        <HomeCard3 />
-        <HomeCard4 />
-        <HomeCard5 />
-        <HomeCard6 />
-        <HomeCard7 />
-        <HomeCard8 />
-        <HomeCard9 />
+      {searchResults.length > 0 ? (
+         <div className="w-full px-8">
+           <h2 className="text-2xl font-bold mb-6">Résultats de recherche</h2>
+           <div className="grid grid-cols-3 gap-4">
+             {searchResults.map(service => (
+               <ServiceCard key={service.id} service={service} />
+             ))}
+           </div>
+         </div>
+       ) : (
+         <>
+           <Category />
+           <hr className="w-48 h-1 mx-auto mb-4 bg-orange-200" />
+           {categories.map(category => (
+             <HomeCard key={category.id} categoryId={category.id} title={category.title} />
+           ))}
+         </>
+       )}
         <Footer />
       </div>
     </div>

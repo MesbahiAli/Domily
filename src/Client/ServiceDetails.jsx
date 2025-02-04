@@ -6,11 +6,12 @@ import Prof from '../img/rb_20.png';
 import { Button, Modal } from 'flowbite-react';
 
 const ServiceDetails = () => {
-  const { id } = useParams();
+  const { providerId, serviceId } = useParams();
   const [provider, setProvider] = useState(null);
+  const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [openModal, setOpenModal] = useState(false); // State for modal
+  const [openModal, setOpenModal] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({
     address: '',
     date: '',
@@ -18,20 +19,28 @@ const ServiceDetails = () => {
     endTime: '',
   });
 
-  // Fetch provider details
+  // Fetch provider and service details
   useEffect(() => {
-    fetch(`http://localhost:8081/api/users/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProvider(data);
+    const fetchData = async () => {
+      try {
+        const providerResponse = await fetch(`http://localhost:8081/api/users/${providerId}`);
+        const providerData = await providerResponse.json();
+        setProvider(providerData);
+
+        const serviceResponse = await fetch(`http://localhost:8081/api/services/${serviceId}`);
+        const serviceData = await serviceResponse.json();
+        setService(serviceData);
+
         setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching provider details:', error);
-        setError('Failed to load provider details.');
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Failed to load data.');
         setLoading(false);
-      });
-  }, [id]);
+      }
+    };
+
+    fetchData();
+  }, [providerId, serviceId]);
 
   // Handle input changes for booking details
   const handleInputChange = (e) => {
@@ -43,22 +52,51 @@ const ServiceDetails = () => {
   };
 
   // Handle form submission for booking
-  const handleBookingSubmit = () => {
-    console.log('Booking Details:', bookingDetails);
-    // Add your API call or logic to handle booking here
-    setOpenModal(false); // Close modal after submission
+  const handleBookingSubmit = async () => {
+    try {
+      const orderData = {
+        ordre_adresse: bookingDetails.address,
+        orderDate: bookingDetails.date,
+        status: "Pending",
+        start_hour: bookingDetails.startTime,
+        end_hour: bookingDetails.endTime,
+        serviceId: parseInt(serviceId),
+        clientId: 2,
+      };
+
+      const response = await fetch("http://localhost:8081/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const result = await response.json();
+      console.log("Order created successfully:", result);
+
+      setOpenModal(false);
+      alert("Order created successfully!");
+    } catch (error) {
+      console.error("Error creating order:", error);
+      alert("Failed to create order. Please try again.");
+    }
   };
 
   if (loading) {
-    return <p className="text-center text-gray-500">Loading provider details...</p>;
+    return <p className="text-center text-gray-500">Loading data...</p>;
   }
 
   if (error) {
     return <p className="text-center text-red-500">{error}</p>;
   }
 
-  if (!provider) {
-    return <p className="text-center text-gray-500">No provider data found.</p>;
+  if (!provider || !service) {
+    return <p className="text-center text-gray-500">No data found.</p>;
   }
 
   return (
@@ -91,6 +129,11 @@ const ServiceDetails = () => {
           <div className="col-span-2 text-orange-600 p-4 w-full items-start">
             <h2 className="font-bold text-2xl mb-3">A propos de moi</h2>
             <p className="mb-3 text-gray-500">{provider.about}</p>
+
+            <h2 className="font-bold text-2xl mb-3">Service Details</h2>
+            <p className="mb-3 text-gray-500">{service.description}</p>
+            <h2 className="font-bold text-2xl mb-3">Price</h2>
+            <p className="mb-3 text-gray-500">{service.price} DH</p>
 
             <h2 className="font-bold text-2xl mb-3">Notation</h2>
             <div className="flex items-center mb-3">
@@ -271,14 +314,24 @@ const ServiceDetails = () => {
                                                 <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clip-rule="evenodd" />
                                             </svg>
                                         </div>
-                                        <input type="time" id="end-time" class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="09:00" max="18:00" value="00:00" required />
+                                        <input
+                      type="time"
+                      name="endTime"
+                      value={bookingDetails.endTime}
+                      onChange={handleInputChange}
+                      className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      min="09:00"
+                      max="18:00"
+                      required
+                    />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </Modal.Body>
                     <Modal.Footer className="justify-center">
-                        <Button onClick={() => setOpenModal(false)} className="bg-green-600">Confirmer</Button>
+                    <Button onClick={() => {handleBookingSubmit();setOpenModal(false);}}className="bg-green-600"> Confirmer</Button>
+
                         <Button onClick={() => setOpenModal(false)} className="bg-red-600">Annuler</Button>
                     </Modal.Footer>
                 </Modal>

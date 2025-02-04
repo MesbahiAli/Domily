@@ -21,6 +21,8 @@ import PProfile from "./Provider/PProfile";
 import Eindex from "./Entreprise/Eindex";
 import EmailE from "./Entreprise/EmailE";
 
+import OrderHistory from "./Client/Orderhistory";
+
 import ServiceList from "./Provider/ServiceList";
 import EservicesListe from "./Entreprise/EServicesListe";
 
@@ -97,6 +99,7 @@ export default function App() {
           <Route path="editpprofile" element={<EditPProfile />} />
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="historique" element={<Historique />} />
+          <Route path="orderhistory" element={<OrderHistory />} />
 
 
 
@@ -156,7 +159,7 @@ export default function App() {
 
 
 
-          <Route path="servicedetails/:id" element={<ServiceDetails />} /> {/* Dynamic route for ServiceDetails */}
+          <Route path="servicedetails/:providerId/:serviceId" element={<ServiceDetails />} /> {/* Dynamic route for ServiceDetails */}
 
           <Route path="*" element={<NoPage />} />
         </Route>

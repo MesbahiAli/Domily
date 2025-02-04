@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Rating } from "flowbite-react";
 import { Link } from "react-router-dom";
+import ServiceCard from './ServiceCard';
 
-function ScrollableCards() {
+function HomeCard({ categoryId, title }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +11,7 @@ function ScrollableCards() {
   const cardsPerView = 3;
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/categories/1")
+    fetch(`http://localhost:8081/api/categories/${categoryId}`)
       .then((response) => response.json())
       .then((data) => {
         setServices(data.services);
@@ -21,7 +22,9 @@ function ScrollableCards() {
         setError("Failed to load services.");
         setLoading(false);
       });
-  }, []);
+  }, [categoryId]);
+
+
 
   const handleScroll = (direction) => {
     const totalSlides = services.length;
@@ -42,7 +45,7 @@ function ScrollableCards() {
 
   return (
     <div className="w-full flex flex-col items-center pb-6">
-      <h1 className="text-2xl font-bold mb-6 text-orange-500">Services Ménagers</h1>
+      <h1 className="text-2xl font-bold mb-6 text-orange-500">{title}</h1>
 
       <div className="relative w-full flex items-center justify-center">
         <button
@@ -55,49 +58,19 @@ function ScrollableCards() {
         </button>
 
         <div className="overflow-hidden w-5/6 relative">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)`,
-              width: `${(services.length / cardsPerView) * 100}%`,
-            }}
-          >
-            {services.map((service) => (
-              <Link to={`/servicedetails/${service.provider.id}`} key={service.id} 
-              className="w-1/5 flex-shrink-0 m-2 bg-white transform hover:scale-105 transition-transform hover:bg-gray-50 rounded-xl p-4 border shadow-md">
-                {/* Provider Name + Service Name */}
-                <div className="flex flex-row justify-between px-4 mb-4 items-center">
-                  <h4 className="text-lg font-bold text-gray-900">
-                    {service.provider?.nom} {service.provider?.prenom}
-                  </h4>
-                  <Rating>
-                    <Rating.Star />
-                    <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
-                  </Rating>
-                </div>
-
-                <hr />
-
-                {/* Service Name */}
-                <h5 className="text-lg mt-2 font-semibold text-center text-gray-900 dark:text-white">
-                  {service.name}
-                </h5>
-
-                {/* Service Description */}
-                <p className="font-normal my-4 text-justify text-gray-700 dark:text-gray-400">
-                  {service.description}
-                </p>
-
-                <hr />
-
-                {/* Service Price */}
-                <h5 className="text-xl mt-4 font-semibold text-center text-gray-900 dark:text-white">
-                  {service.price} DH
-                </h5>
-              </Link>
-            ))}
-          </div>
-        </div>
+  <div
+    className="flex transition-transform duration-500 ease-in-out"
+    style={{
+      transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)`,
+      width: "100%",
+    }}
+  >
+    {services.map(service => (
+      <ServiceCard key={service.id} service={service} />
+    ))}
+    
+  </div>
+</div>
 
         <button
           className="absolute right-8 z-10 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition disabled:opacity-50"
@@ -112,4 +85,4 @@ function ScrollableCards() {
   );
 }
 
-export default ScrollableCards;
+export default HomeCard;

@@ -24,52 +24,52 @@ export default function Category() {
             {
               src: "/src/img/clean.png",
               label: "Services Ménagers",
-              link: "/Pservice/menagers", // URL-friendly
+             // link: "/Pservice/menagers", // URL-friendly
             },
             {
               src: "/src/img/brico.png",
               label: "Services de Bricolage",
-              link: "/Pservice/bricolage", // URL-friendly
+             // link: "/Pservice/bricolage", // URL-friendly
             },
             {
               src: "/src/img/edu.png",
               label: "Soutien Scolaire et Coaching",
-              link: "/Pservice/scolaire", // URL-friendly
+            //  link: "/Pservice/scolaire", // URL-friendly
             },
             {
               src: "/src/img/garden.png",
               label: "Services de Jardinage",
-              link: "/Pservice/jardinage", // URL-friendly
+             // link: "/Pservice/jardinage", // URL-friendly
             },
             {
               src: "/src/img/well.png",
               label: "Services de Bien-Être",
-              link: "/Pservice/bien-etre", // URL-friendly
+             // link: "/Pservice/bien-etre", // URL-friendly
             },
             {
               src: "/src/img/kid.png",
               label: "Services pour Enfants",
-              link: "/Pservice/enfants", // URL-friendly
+             // link: "/Pservice/enfants", // URL-friendly
             },
             {
               src: "/src/img/oold.png",
               label: "Services pour Personnes Âgées",
-              link: "/Pservice/personnes-agees", // URL-friendly
+             // link: "/Pservice/personnes-agees", // URL-friendly
             },
             {
               src: "/src/img/elect.png",
               label: "Services Technologiques",
-              link: "/Pservice/technologiques", // URL-friendly
+             // link: "/Pservice/technologiques", // URL-friendly
             },
             {
               src: "/src/img/livraison.png",
               label: "Transport et Livraison",
-              link: "/Pservice/transport", // URL-friendly
+             // link: "/Pservice/transport", // URL-friendly
             },
             {
               src: "/src/img/pett.png",
               label: "Services Animaliers",
-              link: "/Pservice/animaliers", // URL-friendly
+              //link: "/Pservice/animaliers", // URL-friendly
             },
           ].map((item, index) => (
             <div key={index} className="w-1/5 p-4 text-center">
