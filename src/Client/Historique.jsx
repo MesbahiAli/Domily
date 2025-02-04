@@ -69,7 +69,7 @@ const Historique = () => {
                                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                                      fournisseur
                                 </h2>
-                                <p className="ml-3">{order.service.provider.nom}  {order.service.provider.nom}</p>
+                                <p className="ml-3">{order.service.provider.nom}  {order.service.provider.prenom}</p>
                             </div>
                             <hr />
                             <div className="flex flex-col items-center justify-center">
