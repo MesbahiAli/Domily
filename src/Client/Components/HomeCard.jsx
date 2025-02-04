@@ -3,7 +3,7 @@ import { Rating } from "flowbite-react";
 import { Link } from "react-router-dom";
 import ServiceCard from './ServiceCard';
 
-function HomeCard({ categoryId, title }) {
+function HomeCard({ categoryId =1, title }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +14,13 @@ function HomeCard({ categoryId, title }) {
     fetch(`http://localhost:8081/api/categories/${categoryId}`)
       .then((response) => response.json())
       .then((data) => {
-        setServices(data.services);
+        console.log("API Response:", data); // Log the API response
+        if (data.services) {
+          setServices(data.services);
+        } else {
+          console.error("No services found in the API response.");
+          setServices([]); // Set services to an empty array to avoid errors
+        }
         setLoading(false);
       })
       .catch((error) => {
