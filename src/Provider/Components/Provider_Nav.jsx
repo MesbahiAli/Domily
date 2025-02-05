@@ -23,6 +23,7 @@ const Provider_Nav = () => {
         <Navbar.Link href="servicelist" className="text-orange-700 font-semibold ">Mes services</Navbar.Link>
         <Navbar.Link href="EmailP" className="text-orange-700 font-semibold ">Contact</Navbar.Link>
         <Navbar.Link href="PProfile" className="text-orange-700 font-semibold ">Profile</Navbar.Link>
+        <Navbar.Link href="Phistorique" className="text-orange-700 font-semibold ">Mes Reservations</Navbar.Link>
       </Navbar.Collapse>
       </Navbar>
       

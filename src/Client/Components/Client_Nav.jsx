@@ -20,7 +20,7 @@ const Client_Nav = () => {
         Accueil
         </Navbar.Link>
         <Navbar.Link href="EmailUs" className="text-orange-700 font-semibold">Contact</Navbar.Link>
-        <Navbar.Link href="Historique" className="text-orange-700 font-semibold">Historique</Navbar.Link>
+        <Navbar.Link href="Historique" className="text-orange-700 font-semibold">Orders</Navbar.Link>
         <Navbar.Link href="Profile" className="text-orange-700 font-semibold">Profile</Navbar.Link>
 
       </Navbar.Collapse>

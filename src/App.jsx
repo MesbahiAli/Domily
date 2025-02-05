@@ -23,6 +23,7 @@ import EmailE from "./Entreprise/EmailE";
 
 import OrderHistory from "./Client/Orderhistory";
 
+
 import ServiceList from "./Provider/ServiceList";
 import EservicesListe from "./Entreprise/EServicesListe";
 
@@ -32,6 +33,7 @@ import EeditService from "./Entreprise/EEditServices";
 import EditPProfile from "./Provider/EditPProfile";
 import EditProfile from "./Client/EditProfile";
 import Historique from "./Client/Historique";
+import Phistorique from "./Provider/Phistorique";
 import ServiceDetails from "./Client/ServiceDetails";
 
 import HomeCard from "./Client/Components/HomeCard"; 
@@ -99,6 +101,7 @@ export default function App() {
           <Route path="editpprofile" element={<EditPProfile />} />
           <Route path="editprofile" element={<EditProfile />} />
           <Route path="historique" element={<Historique />} />
+          <Route path="phistorique" element={<Phistorique />} />
           <Route path="orderhistory" element={<OrderHistory />} />
 
 
