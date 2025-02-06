@@ -22,52 +22,52 @@ export default function Category() {
             {
               src: "/src/img/clean.png",
               label: "Services Ménagers",
-              link: "/Eservice/menagers",
+             // link: "/Eservice/menagers",
             },
             {
               src: "/src/img/brico.png",
               label: "Services de Bricolage",
-              link: "/Eservice/bricolage",
+             // link: "/Eservice/bricolage",
             },
             {
               src: "/src/img/edu.png",
               label: "Soutien Scolaire et Coaching",
-              link: "/Eservice/scolaire",
+            //  link: "/Eservice/scolaire",
             },
             {
               src: "/src/img/garden.png",
               label: "Services de Jardinage",
-              link: "/Eservice/jardinage",
+           //   link: "/Eservice/jardinage",
             },
             {
               src: "/src/img/well.png",
               label: "Services de Bien-Être",
-              link: "/Eservice/bien-etre",
+            //  link: "/Eservice/bien-etre",
             },
             {
               src: "/src/img/kid.png",
               label: "Services pour Enfants",
-              link: "/Eservice/enfants",
+           //   link: "/Eservice/enfants",
             },
             {
               src: "/src/img/oold.png",
               label: "Services pour Personnes Âgées",
-              link: "/Eservice/personnes-agees",
+            //  link: "/Eservice/personnes-agees",
             },
             {
               src: "/src/img/elect.png",
               label: "Services Technologiques",
-              link: "/Eservice/technologiques",
+           //   link: "/Eservice/technologiques",
             },
             {
               src: "/src/img/livraison.png",
               label: "Transport et Livraison",
-              link: "/Eservice/transport",
+            //  link: "/Eservice/transport",
             },
             {
               src: "/src/img/pett.png",
               label: "Services Animaliers",
-              link: "/Eservice/animaliers",
+            //  link: "/Eservice/animaliers",
             },
           ].map((item, index) => (
             <div key={index} className="w-1/5 p-4 text-center">
