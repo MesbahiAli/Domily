@@ -44,14 +44,14 @@ const Cindex = () => {
   const categories = [
     { id: 1, title: "Services Ménagers" },
     { id: 2, title: "Services de Bricolage" },
-    { id: 3, title: "Soutien Scolaire et Coaching" },
-    { id: 4, title: "Services de Jardinage" },
-    { id: 5, title: "Services de Bien-Être" },
-    { id: 6, title: "Services pour Enfants" },
-    { id: 7, title: "Services pour Personnes Âgées" },
-    { id: 8, title: "Services Technologiques" },
-    { id: 9, title: "Transport et Livraison" },
-    { id: 10, title: "Services Animaliers" }
+    { id: 10, title: "Soutien Scolaire et Coaching" },
+    { id: 3, title: "Services de Jardinage" },
+    { id: 4, title: "Services de Bien-Être" },
+    { id: 5, title: "Services pour Enfants" },
+    { id: 6, title: "Services pour Personnes Âgées" },
+    { id: 7, title: "Services Technologiques" },
+    { id: 8, title: "Transport et Livraison" },
+    { id: 9, title: "Services Animaliers" }
   ];
   return (
     <div className="flex flex-col w-full bg-gray-50">

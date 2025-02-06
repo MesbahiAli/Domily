@@ -49,12 +49,11 @@ const ServiceDetails = () => {
     return (totalRating / reviews.length).toFixed(1);
   };
 
-  // Count completed orders
   const countCompletedOrders = (orders) => {
     if (!orders) return 0;
     return orders.filter((order) => order.status === 'Completed').length;
   };
-
+  
   // Handle input changes for booking details
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -172,8 +171,7 @@ const ServiceDetails = () => {
               <p className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400">{averageRating}</p>
             </div>
 
-            <h2 className="font-bold text-2xl mb-3">Nombre de services complets</h2>
-            <p className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 mb-6">{completedOrdersCount}</p>
+           
 
             <hr />
 
