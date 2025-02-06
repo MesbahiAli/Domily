@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Label, Select, HR, Card, Rating } from "flowbite-react";
+import { Card, Badge, Spinner } from "flowbite-react";
 import Provider_Nav from "./Components/Provider_Nav";
 
 const Phistorique = () => {
@@ -10,11 +10,9 @@ const Phistorique = () => {
     useEffect(() => {
         const fetchProviderOrders = async () => {
             try {
-                // Fetch services for the provider
                 const servicesResponse = await fetch('http://localhost:8081/api/services/provider/3');
                 const servicesData = await servicesResponse.json();
-
-                // Fetch client details for each order in the services
+                
                 const servicesWithOrdersAndClients = await Promise.all(
                     servicesData.map(async (service) => {
                         const ordersWithClients = await Promise.all(
@@ -41,53 +39,63 @@ const Phistorique = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="flex justify-center items-center h-screen"><Spinner size="xl" /></div>;
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return <div className="text-center text-red-500">{error}</div>;
     }
 
-    return ( 
+    return (
         <>
-    < Provider_Nav />
-        <div>
-            <h1>Provider Order History</h1>
-            {services.length === 0 ? (
-                <p>No orders found.</p>
-            ) : (
-                <ul>
+            <Provider_Nav />
+            <div className="w-3/4 mx-auto my-10">
+                <h1 className="text-3xl font-bold text-center mb-8">Historique des commandes</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {services.map((service) => (
-                        <li key={service.id}>
-                            <h2>Service: {service.name}</h2>
-                            <p>Description: {service.description}</p>
-                            <p>Price: {service.price} DH</p>
-                            <h3>Orders</h3>
-                            {service.orders.length === 0 ? (
-                                <p>No orders for this service.</p>
-                            ) : (
-                                <ul>
+                        service.orders.length > 0 && (
+                            <Card key={service.id} className="p-4 shadow-md">
+                                <h2 className="text-xl font-semibold">{service.name}</h2>
+                                <p className="text-gray-600">{service.description}</p>
+                                <p className="font-bold">Prix: {service.price} DH</p>
+                                <h3 className="text-lg font-semibold mt-4">Commandes</h3>
+                                <div className="space-y-4">
                                     {service.orders.map((order) => (
-                                        <li key={order.id}>
-                                            <h4>Order ID: {order.id}</h4>
-                                            <p>Address: {order.ordre_adresse}</p>
-                                            <p>Order Date: {order.orderDate}</p>
-                                            <p>Status: {order.status}</p>
-                                            <p>Start Hour: {order.start_hour}</p>
-                                            <p>End Hour: {order.end_hour}</p>
-                                            <h5>Client Details</h5>
-                                            <p>Name: {order.client.nom} {order.client.prenom}</p>
-                                            <p>Email: {order.client.email}</p>
-                                            <p>Phone: {order.client.phone}</p>
-                                        </li>
+                                        <div key={order.id} className="border-t pt-3">
+                                            <p><strong>Adresse:</strong> {order.ordre_adresse}</p>
+                                            <p><strong>Date:</strong> {order.orderDate}</p>
+                                            <p><strong>Heure:</strong> {order.start_hour} - {order.end_hour}</p>
+                                            <Badge color={order.status === "Completed" ? "green" : order.status === "Pending" ? "yellow" : "red"}>
+                                                {order.status}
+                                            </Badge>
+                                            <h4 className="mt-2 font-semibold">Client</h4>
+                                            <p>{order.client.nom} {order.client.prenom}</p>
+                                            <p>{order.client.email}</p>
+                                            <p>{order.client.phone}</p>
+
+                                            {/* Display reviews if available */}
+                                            {service.reviews.length > 0 && (
+                                                <div className="mt-4">
+                                                    <h4 className="font-semibold">Reviews</h4>
+                                                    <div className="space-y-2">
+                                                        {service.reviews.map((review) => (
+                                                            <div key={review.id} className="border-b pb-2">
+                                                                <p><strong>Note:</strong> {review.rating} / 5 stars</p>
+                                                                <p><strong>Commentaire:</strong> {review.comment}</p>
+                                                                <p><strong>Date:</strong> {review.date}</p>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     ))}
-                                </ul>
-                            )}
-                        </li>
+                                </div>
+                            </Card>
+                        )
                     ))}
-                </ul>
-            )}
-        </div>
+                </div>
+            </div>
         </>
     );
 };

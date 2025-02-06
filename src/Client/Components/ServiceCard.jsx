@@ -5,6 +5,17 @@ const ServiceCard = ({ service }) => {
   // Count the number of orders for the service
   const orderCount = service.orders ? service.orders.length : 0;
 
+  // Calculate the average rating
+  const calculateAverageRating = (reviews) => {
+    if (reviews && reviews.length > 0) {
+      const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+      return (totalRating / reviews.length).toFixed(2); // Round to 2 decimal places
+    }
+    return 0;
+  };
+
+  const averageRating = calculateAverageRating(service.reviews);
+
   return (
     <Link
       to={`/servicedetails/${service.provider.id}/${service.id}`}
@@ -23,7 +34,7 @@ const ServiceCard = ({ service }) => {
         </h4>
         <Rating>
           <Rating.Star />
-          <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+          <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">{averageRating}</p>
         </Rating>
       </div>
       <hr />
