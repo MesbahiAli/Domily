@@ -26,33 +26,33 @@ export const login = createAsyncThunk(
 );
 
 export const register = createAsyncThunk(
- 'auth/register',
- async (userData, { rejectWithValue }) => {
-   try {
-     const transformedData = {
-       email: userData.email,
-       password: userData.password,
-       nom: userData.lastName,      
-       prenom: userData.firstName,  
-       role: userData.role  
-     };
+  'auth/register',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const transformedData = {
+        email: userData.email,
+        password: userData.password,
+        nom: userData.lastName,      
+        prenom: userData.firstName,  
+        role: userData.role  
+      };
 
-     const response = await fetch('http://localhost:8081/api/auth/register', {
-       method: 'POST',
-       headers: { 'Content-Type': 'application/json' },
-       body: JSON.stringify(transformedData),
-     });
-     
-     if (!response.ok) {
-       const errorData = await response.json();
-       throw new Error(errorData.message || 'Registration failed');
-     }
-     
-     return await response.json();
-   } catch (error) {
-     return rejectWithValue(error.message);
-   }
- }
+      const response = await fetch('http://localhost:8081/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(transformedData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+      
+      const text = await response.text(); // Change from json() to text()
+      return { message: text }; // Return as object
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
 );
 
 const authSlice = createSlice({
