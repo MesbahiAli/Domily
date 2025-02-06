@@ -15,8 +15,11 @@ const Register = () => {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        role: 'CLIENT'
     });
+
+    const roles = ['CLIENT', 'PROVIDER', 'ENTERPRISE'];
 
     const handleChange = (e) => {
         setUserData({
@@ -102,11 +105,21 @@ const Register = () => {
                                             onChange={handleChange}
                                         />
                                     </div>
-                                    
-                                    <div className="flex items-center gap-2">
-                                        <Checkbox id="remember" />
-                                        <Label htmlFor="remember">J'accepte <a href="/Terms" target="_blank" className="text-orange-500 hover:underline hover:text-orange-800">les conditions d'utilisation</a></Label>
-                                    </div>
+                                    <div>
+                <div className="mb-2 block">
+                    <Label htmlFor="role">Role</Label>
+                </div>
+                <select
+                    id="role"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-500 focus:border-orange-500 block w-full p-2.5"
+                    value={userData.role}
+                    onChange={handleChange}
+                >
+                    {roles.map(role => (
+                        <option key={role} value={role}>{role}</option>
+                    ))}
+                </select>
+            </div>       
                                     <Button
                                         type="submit"
                                         className="bg-orange-500 hover:bg-orange-900"

@@ -6,31 +6,57 @@ import logosm from "../img/logo-sm.png";
 import google from "../img/google icon.png";
 import background from "../img/bg-icon.jpg";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../features/auth/authSlice';
+
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { loading, error } = useSelector((state) => state.auth);
+    const location = useLocation();
+    const { loading, error, user } = useSelector((state) => state.auth);
+    
     const [credentials, setCredentials] = useState({
         email: '',
         password: ''
     });
+
     const handleChange = (e) => {
         setCredentials({
             ...credentials,
             [e.target.id]: e.target.value
         });
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const result = await dispatch(login(credentials));
         if (!result.error) {
-            navigate('/Cindex');
+            const role = result.payload.role;
+            let redirectPath = location.state?.from?.pathname;
+            
+            if (!redirectPath) {
+                switch (role) {
+                    case 'CLIENT':
+                        redirectPath = '/cindex';
+                        break;
+                    case 'PROVIDER':
+                        redirectPath = '/pindex';
+                        break;
+                    case 'ENTERPRISE':
+                        redirectPath = '/eindex';
+                        break;
+                    case 'ADMIN':
+                        redirectPath = '/aindex';
+                        break;
+                    default:
+                        redirectPath = '/';
+                }
+            }
+            
+            navigate(redirectPath, { replace: true });
         }
     };
-
     return (
 
         <>

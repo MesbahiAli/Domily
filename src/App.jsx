@@ -66,6 +66,7 @@ import Gestion_Client from "./Admin/Gestion_Client";
 import Gestion_Provider from "./Admin/Gestion_Provider";
 import Gestion_Entreprise from "./Admin/Gestion_Entreprise";
 
+import PrivateRoute from './features/auth/PrivateRoute';
 
 
 export default function App() {
@@ -73,97 +74,62 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          {/* Public Routes */}
           <Route index element={<Home />} />
           <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="navbar" element={<Nav />} />
-          <Route path="cindex" element={<Cindex />} />
-          <Route path="pindex" element={<Pindex />} />
-          <Route path="eindex" element={<Eindex />} />
-          <Route path="emailus" element={<EmailUs />} />
-          <Route path="emailp" element={<EmailP />} />
-          <Route path="emaile" element={<EmailE />} />
-          <Route path="service" element={<Service />} />
-          <Route path="cservice" element={<Cservice />} />
-          <Route path="pservice" element={<Pservice />} />
-
-          <Route path="eservice" element={<Eservice />} />
           <Route path="terms" element={<Terms />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="pprofile" element={<PProfile />} />
-          <Route path="serviceList" element={<ServiceList />} />
-          <Route path="eservicesListe" element={<EservicesListe />} />
-       
-          <Route path="editservice" element={<EditService />} />
-          <Route path="eeditservice" element={<EeditService />} />
-          <Route path="editpprofile" element={<EditPProfile />} />
-          <Route path="editprofile" element={<EditProfile />} />
-          <Route path="historique" element={<Historique />} />
-          <Route path="phistorique" element={<Phistorique />} />
-          <Route path="orderhistory" element={<OrderHistory />} />
+          <Route path="navbar" element={<Nav />} />
 
+          {/* Protected Client Routes */}
+          <Route path="cindex" element={<PrivateRoute><Cindex /></PrivateRoute>} />
+          <Route path="emailus" element={<PrivateRoute><EmailUs /></PrivateRoute>} />
+          <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="editprofile" element={<PrivateRoute><EditProfile /></PrivateRoute>} />
+          <Route path="historique" element={<PrivateRoute><Historique /></PrivateRoute>} />
+          <Route path="orderhistory" element={<PrivateRoute><OrderHistory /></PrivateRoute>} />
+          <Route path="cservice" element={<PrivateRoute><Cservice /></PrivateRoute>} />
 
+          {/* Protected Provider Routes */}
+          <Route path="pindex" element={<PrivateRoute><Pindex /></PrivateRoute>} />
+          <Route path="emailp" element={<PrivateRoute><EmailP /></PrivateRoute>} />
+          <Route path="pservice" element={<PrivateRoute><Pservice /></PrivateRoute>} />
+          <Route path="pprofile" element={<PrivateRoute><PProfile /></PrivateRoute>} />
+          <Route path="serviceList" element={<PrivateRoute><ServiceList /></PrivateRoute>} />
+          <Route path="editservice" element={<PrivateRoute><EditService /></PrivateRoute>} />
+          <Route path="editpprofile" element={<PrivateRoute><EditPProfile /></PrivateRoute>} />
+          <Route path="phistorique" element={<PrivateRoute><Phistorique /></PrivateRoute>} />
 
+          {/* Protected Enterprise Routes */}
+          <Route path="eindex" element={<PrivateRoute><Eindex /></PrivateRoute>} />
+          <Route path="emaile" element={<PrivateRoute><EmailE /></PrivateRoute>} />
+          <Route path="eservice" element={<PrivateRoute><Eservice /></PrivateRoute>} />
+          <Route path="eservicesListe" element={<PrivateRoute><EservicesListe /></PrivateRoute>} />
+          <Route path="eeditservice" element={<PrivateRoute><EeditService /></PrivateRoute>} />
+          <Route path="eprofile" element={<PrivateRoute><EProfile /></PrivateRoute>} />
+          <Route path="editeprofile" element={<PrivateRoute><EditEProfile /></PrivateRoute>} />
+          <Route path="createservice" element={<PrivateRoute><CreateService /></PrivateRoute>} />
 
-        <Route path="aindex" element={<Aindex />} />
-        <Route path="aprofile" element={<AProfile />} />
-        <Route path="editaprofile" element={<EditAprofile />} />
-        <Route path="gestionclient" element={<Gestion_Client />} />
-        <Route path="gestionprovider" element={<Gestion_Provider />} />
-        <Route path="gestionentreprise" element={<Gestion_Entreprise />} />
+          {/* Protected Admin Routes */}
+          <Route path="aindex" element={<PrivateRoute><Aindex /></PrivateRoute>} />
+          <Route path="aprofile" element={<PrivateRoute><AProfile /></PrivateRoute>} />
+          <Route path="editaprofile" element={<PrivateRoute><EditAprofile /></PrivateRoute>} />
+          <Route path="gestionclient" element={<PrivateRoute><Gestion_Client /></PrivateRoute>} />
+          <Route path="gestionprovider" element={<PrivateRoute><Gestion_Provider /></PrivateRoute>} />
+          <Route path="gestionentreprise" element={<PrivateRoute><Gestion_Entreprise /></PrivateRoute>} />
 
+          {/* Dynamic Routes */}
+          <Route path="/Cservice/:category" element={<PrivateRoute><Cservice /></PrivateRoute>} />
+          <Route path="/Pservice/:category" element={<PrivateRoute><Pservice /></PrivateRoute>} />
+          <Route path="/Eservice/:category" element={<PrivateRoute><Eservice /></PrivateRoute>} />
+          <Route path="/editservice/:id" element={<PrivateRoute><EditService /></PrivateRoute>} />
+          <Route path="/eeditservice/:id" element={<PrivateRoute><EeditService /></PrivateRoute>} />
+          <Route path="servicedetails/:providerId/:serviceId" element={<PrivateRoute><ServiceDetails /></PrivateRoute>} />
 
-          <Route path="/" element={<Category />} />
-          <Route path="/Cservice/:category" element={<Cservice />} /> {/* Dynamic route */}
-
-          <Route path="/" element={<Category />} />
-          <Route path="/Pservice/:category" element={<Pservice />} /> {/* Dynamic route */}
-
-          <Route path="/" element={<Ecategory />} />
-          <Route path="/Eservice/:category" element={<Eservice />} /> {/* Dynamic route */}
-
-
-
-          <Route path="/" element={<ServiceList />} />
-          <Route path="/editservice/:id" element={<EditService />} />
-
-          <Route path="/" element={<EservicesListe />} />
-          <Route path="/eeditservice/:id" element={<EeditService />} />
-
-
-          
-
-          {/* Add HomeCard and ServiceDetails routes */}
-          <Route path="homecard" element={<HomeCard />} /> {/* Route for HomeCard */}
-          <Route path="homecard1" element={<HomeCard1 />} /> {/* Route for HomeCard1 */}
-          <Route path="homecard2" element={<HomeCard2 />} /> {/* Route for HomeCard2 */}
-          <Route path="homecard3" element={<HomeCard3 />} /> {/* Route for HomeCard3 */}
-          <Route path="homecard4" element={<HomeCard4 />} /> {/* Route for HomeCard4 */}
-          <Route path="homecard5" element={<HomeCard5 />} /> {/* Route for HomeCard5 */}
-          <Route path="homecard6" element={<HomeCard6 />} /> {/* Route for HomeCard6 */}
-          <Route path="homecard7" element={<HomeCard7 />} /> {/* Route for HomeCard7 */}
-          <Route path="homecard8" element={<HomeCard8 />} /> {/* Route for HomeCard8 */}
-          <Route path="homecard9" element={<HomeCard9 />} /> {/* Route for HomeCard9 */}
-
-        <Route path="eprofile" element={<EProfile />} />
-        <Route path="editeprofile" element={<EditEProfile />} />
-
-     
-        <Route path="servicesliste" element={<ServicesListe />} />
-  
-        
-        <Route path="createservice" element={<CreateService />} />
-        <Route path="editservices" element={<EditServices />} />
-
-
-
-
-
-
-          <Route path="servicedetails/:providerId/:serviceId" element={<ServiceDetails />} /> {/* Dynamic route for ServiceDetails */}
-
+          {/* HomeCard Routes */}
+          <Route path="homecard" element={<PrivateRoute><HomeCard /></PrivateRoute>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
