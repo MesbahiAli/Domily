@@ -8,10 +8,11 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     // Fetch user data from the API
-    fetch('http://localhost:8081/api/users/2')
+    fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch user data');

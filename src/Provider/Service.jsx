@@ -40,7 +40,7 @@ const Service = () => {
       name: formData.name,
       description: formData.description,
       price: parseFloat(formData.price), // Ensure price is a number
-      provider_id: 3, // Hardcoded provider_id
+      provider_id: localStorage.getItem('userId'), // Hardcoded provider_id
       category_id: parseInt(formData.category_id, 10), // Ensure category_id is a number
     };
   

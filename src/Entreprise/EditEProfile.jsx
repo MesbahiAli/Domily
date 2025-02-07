@@ -21,7 +21,7 @@ const EProfile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8081/api/users/20');
+                const response = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
@@ -51,7 +51,7 @@ const EProfile = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:8081/api/users/20`, {
+            const response = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

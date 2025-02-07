@@ -10,7 +10,7 @@ const EditAprofile = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:8081/api/users/5")
+        fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`)
             .then(response => response.json())
             .then(data => setUser(data));
     }, []);
@@ -21,7 +21,7 @@ const EditAprofile = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:8081/api/users/5", {
+        fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(user)

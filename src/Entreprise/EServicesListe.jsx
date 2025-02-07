@@ -7,7 +7,7 @@ const ServiceList = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8081/api/services/provider/20")
+        fetch("http://localhost:8081/api/services/provider/ "+localStorage.getItem('userId'))
             .then(response => response.json())
             .then(data => setServices(data))
             .catch(error => console.error("Error fetching services:", error));

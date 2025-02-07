@@ -12,7 +12,7 @@ const Historique = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const userResponse = await fetch('http://localhost:8081/api/users/2');
+                const userResponse = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`);
                 const userData = await userResponse.json();
                 const ordersWithServiceDetails = await Promise.all(
                     userData.orders.map(async (order) => {
@@ -47,7 +47,7 @@ const Historique = () => {
                 rating,
                 comment,
                 date: currentDate,
-                user: { id: 2 },
+                user: { id: localStorage.getItem('userId') },
                 service: { id: orders.find(order => order.id === orderId).serviceId },
             };
 

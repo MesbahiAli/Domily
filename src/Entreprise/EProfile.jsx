@@ -24,7 +24,7 @@ const EProfile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8081/api/users/20'); // Replace with dynamic ID if needed
+                const response = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`); // Replace with dynamic ID if needed
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }

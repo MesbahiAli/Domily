@@ -20,6 +20,7 @@ import Profile from "./Client/Profile";
 import PProfile from "./Provider/PProfile";
 import Eindex from "./Entreprise/Eindex";
 import EmailE from "./Entreprise/EmailE";
+import Ehistorique from "./Entreprise/Ehistorique";
 
 import OrderHistory from "./Client/Orderhistory";
 
@@ -101,6 +102,8 @@ export default function App() {
           <Route path="editservice" element={<PrivateRoute><EditService /></PrivateRoute>} />
           <Route path="editpprofile" element={<PrivateRoute><EditPProfile /></PrivateRoute>} />
           <Route path="phistorique" element={<PrivateRoute><Phistorique /></PrivateRoute>} />
+          <Route path="service" element={<Service />} />
+         
 
           {/* Protected Enterprise Routes */}
           <Route path="eindex" element={<PrivateRoute><Eindex /></PrivateRoute>} />
@@ -111,6 +114,8 @@ export default function App() {
           <Route path="eprofile" element={<PrivateRoute><EProfile /></PrivateRoute>} />
           <Route path="editeprofile" element={<PrivateRoute><EditEProfile /></PrivateRoute>} />
           <Route path="createservice" element={<PrivateRoute><CreateService /></PrivateRoute>} />
+          <Route path="ehistorique" element={<Ehistorique />} />
+         
 
           {/* Protected Admin Routes */}
           <Route path="aindex" element={<PrivateRoute><Aindex /></PrivateRoute>} />

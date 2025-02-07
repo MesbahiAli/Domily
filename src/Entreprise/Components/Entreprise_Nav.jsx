@@ -38,12 +38,16 @@ const Entreprise_Nav = () => {
          <Navbar.Link as={Link} to="/EservicesListe" className="text-orange-700 font-semibold">
            Mes offres
          </Navbar.Link>
+         <Navbar.Link as={Link} to="/Ehistorique" className="text-orange-700 font-semibold">
+         Mes orders 
+         </Navbar.Link>
          <Navbar.Link as={Link} to="/EmailE" className="text-orange-700 font-semibold">
            Contact
          </Navbar.Link>
          <Navbar.Link as={Link} to="/EProfile" className="text-orange-700 font-semibold">
            Profile
          </Navbar.Link>
+
        </Navbar.Collapse>
      </Navbar>
    </>

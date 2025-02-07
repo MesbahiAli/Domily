@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Badge, Spinner } from "flowbite-react";
-import Provider_Nav from "./Components/Provider_Nav";
+import Entreprise_Nav from "./Components/Entreprise_Nav";
 
-const Phistorique = () => {
+const Ehistorique = () => {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+console.log(localStorage.getItem('userId'));
 
     useEffect(() => {
         const fetchProviderOrders = async () => {
@@ -48,7 +49,7 @@ const Phistorique = () => {
 
     return (
         <>
-            <Provider_Nav />
+            <Entreprise_Nav />
             <div className="w-3/4 mx-auto my-10">
                 <h1 className="text-3xl font-bold text-center mb-8">Historique des commandes</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -100,4 +101,4 @@ const Phistorique = () => {
     );
 };
 
-export default Phistorique;
+export default Ehistorique;

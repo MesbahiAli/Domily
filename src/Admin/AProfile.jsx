@@ -8,7 +8,7 @@ const AProfile = () => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:8081/api/users/5')
+        fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`)
             .then(response => response.json())
             .then(data => setUser(data))
             .catch(error => console.error('Error fetching user data:', error));

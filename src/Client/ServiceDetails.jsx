@@ -73,7 +73,7 @@ const ServiceDetails = () => {
         start_hour: bookingDetails.startTime,
         end_hour: bookingDetails.endTime,
         serviceId: parseInt(serviceId),
-        clientId: 2,
+        clientId: parseInt(localStorage.getItem("userId")),
       };
 
       const response = await fetch("http://localhost:8081/api/orders", {

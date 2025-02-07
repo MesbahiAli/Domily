@@ -21,7 +21,7 @@ const EditPProfile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch('http://localhost:8081/api/users/3'); 
+                const response = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`); 
                 if (!response.ok) {
                     throw new Error('Failed to fetch user data');
                 }
@@ -34,6 +34,7 @@ const EditPProfile = () => {
                     about: data.about,
                     phone: data.phone,
                     email: data.email,
+                    secteur: data.secteur,
                 });
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -54,7 +55,7 @@ const EditPProfile = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8081/api/users/3', { // Replace with dynamic ID if needed
+            const response = await fetch(`http://localhost:8081/api/users/${localStorage.getItem('userId')}`, { // Replace with dynamic ID if needed
                 method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -193,6 +194,24 @@ const EditPProfile = () => {
                                     value={userData.email}
                                     onChange={handleInputChange}
                                     required
+                                />
+                            </div>
+
+                            <h2 className='font-bold text-xl mb-2'>Secteur</h2>
+                            <div className="relative mb-2">
+                                <div className="absolute inset-y-0 start-0 top-0 flex items-center p-3 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 mr-3">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3" />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    id="secteur"
+                                    className="bg-gray-50 border mb-3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Hamria ..."
+                                    value={userData.secteur}
+                                    onChange={handleInputChange}
+                                    
                                 />
                             </div>
 
