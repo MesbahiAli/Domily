@@ -69,6 +69,33 @@ console.log(localStorage.getItem('userId'));
                                             <Badge color={order.status === "Completed" ? "green" : order.status === "Pending" ? "yellow" : "red"}>
                                                 {order.status}
                                             </Badge>
+                                             {order.status === "pending" && 
+                                              (localStorage.getItem('role') === "PROVIDER" || localStorage.getItem('role') === "ENTERPRISE") && (
+                                                <Button
+                                                    onClick={async () => {
+                                                        try {
+                                                            const response = await fetch(`http://localhost:8081/api/orders/${order.id}/status`, {
+                                                                method: 'PUT',
+                                                                headers: { 'Content-Type': 'application/json' },
+                                                                body: JSON.stringify({ status: "Completed" }) // Changed this line
+                                                            });
+                                            
+                                                            if (response.ok) {
+                                                                window.location.reload();
+                                                                alert('Order status updated successfully!');
+                                                            } else {
+                                                                alert('Failed to update order status.');
+                                                            }
+                                                        } catch (error) {
+                                                            console.error('Error updating order status:', error);
+                                                            alert('Error updating order status.');
+                                                        }
+                                                    }}
+                                                    className="mt-4 bg-green-500 hover:bg-green-600 text-white"
+                                                >
+                                                    Mark as Completed
+                                                </Button>
+                                            )}
                                             <h4 className="mt-2 font-semibold">Client</h4>
                                             <p>{order.client.nom} {order.client.prenom}</p>
                                             <p>{order.client.email}</p>
