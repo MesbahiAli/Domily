@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Badge, Spinner } from "flowbite-react";
+import { Card, Badge, Spinner, Button } from "flowbite-react";
+
 import Provider_Nav from "./Components/Provider_Nav";
 
 const Phistorique = () => {
@@ -55,24 +56,56 @@ const Phistorique = () => {
                     {services.map((service) => (
                         service.orders.length > 0 && (
                             <Card key={service.id} className="p-4 shadow-md">
+                                <h3 className="text-lg font-semibold mt-4">Commande</h3>
+                                <h3 className="text-lg font-semibold mt-4">Service</h3>
                                 <h2 className="text-xl font-semibold">{service.name}</h2>
                                 <p className="text-gray-600">{service.description}</p>
                                 <p className="font-bold">Prix: {service.price} DH</p>
-                                <h3 className="text-lg font-semibold mt-4">Commandes</h3>
+                                
                                 <div className="space-y-4">
                                     {service.orders.map((order) => (
                                         <div key={order.id} className="border-t pt-3">
+                                             <h3 className="text-lg font-semibold mt-4">Ordre</h3>
                                             <p><strong>Adresse:</strong> {order.ordre_adresse}</p>
                                             <p><strong>Date:</strong> {order.orderDate}</p>
                                             <p><strong>Heure:</strong> {order.start_hour} - {order.end_hour}</p>
                                             <Badge color={order.status === "Completed" ? "green" : order.status === "Pending" ? "yellow" : "red"}>
                                                 {order.status}
                                             </Badge>
+                                            
+                                            {order.status === "Pending" && 
+  (localStorage.getItem('role') === "PROVIDER" || localStorage.getItem('role') === "ENTERPRISE") && (
+    <Button
+        onClick={async () => {
+            try {
+                const response = await fetch(`http://localhost:8081/api/orders/${order.id}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: "Completed" }) // Changed this line
+                });
+
+                if (response.ok) {
+                    window.location.reload();
+                    alert('Order status updated successfully!');
+                } else {
+                    alert('Failed to update order status.');
+                }
+            } catch (error) {
+                console.error('Error updating order status:', error);
+                alert('Error updating order status.');
+            }
+        }}
+        className="mt-4 bg-green-500 hover:bg-green-600 text-white"
+    >
+        Mark as Completed
+    </Button>
+)}
                                             <h4 className="mt-2 font-semibold">Client</h4>
                                             <p>{order.client.nom} {order.client.prenom}</p>
                                             <p>{order.client.email}</p>
                                             <p>{order.client.phone}</p>
 
+                                           
                                             {/* Display reviews if available */}
                                             {service.reviews.length > 0 && (
                                                 <div className="mt-4">

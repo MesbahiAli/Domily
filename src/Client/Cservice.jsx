@@ -65,85 +65,8 @@ const Cservice = () => {
             </span>
           </h1>
 
-          {/* Filters and search button */}
-          <div className="grid grid-cols-7 gap-4">
-            <div className="w-full mb-4 col-span-2">
-              <div className="mb-2 block">
-                <Label htmlFor="Services" value="Services" />
-              </div>
-              <Select id="Services" required>
-                <option>Service</option>
-                <option>Services Ménagers</option>
-                <option>Services de Bricolage</option>
-                <option>Soutien Scolaire et Coaching</option>
-                <option>Services de Jardinage</option>
-                <option>Services de Bien-Être</option>
-                <option>Services pour Enfants</option>
-                <option>Services pour Personnes Âgées</option>
-                <option>Services Technologiques</option>
-                <option>Transport et Livraison</option>
-                <option>Services Animaliers</option>
-              </Select>
-            </div>
-
-            <div className="w-full mb-4 col-span-2">
-              <div className="mb-2 block">
-                <Label htmlFor="secteur" value="Secteur" />
-              </div>
-              <Select id="secteur" required>
-                <option>Meknes</option>
-                <option>Ancienne Medina</option>
-                <option>Belle vue</option>
-                <option>Berrima</option>
-                <option>Bourj Moulay Omar</option>
-                <option>Dar Kebira</option>
-                <option>El Bassatine</option>
-                <option>El Mechouar Stinia</option>
-                <option>Hamria</option>
-                <option>Hay Salam</option>
-              </Select>
-            </div>
-
-            <div className="w-full mb-4 col-span-2">
-              <div className="mb-2 block">
-                <Label value="Prix(DH)" />
-              </div>
-              <div className="relative">
-                <input
-                  type="number"
-                  id="number-input"
-                  aria-describedby="helper-text-explanation"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="100"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="w-full mb-4 flex items-end">
-              <button
-                type="submit"
-                className="inline-flex items-center py-2.5 px-3 text-sm font-medium text-white bg-orange-500 rounded-lg border border-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-orange-700 dark:focus:ring-yellow-800"
-              >
-                <svg
-                  className="w-4 h-4 me-2"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-                Recherche
-              </button>
-            </div>
-          </div>
+       
+         
 
           <HR.Trimmed />
 

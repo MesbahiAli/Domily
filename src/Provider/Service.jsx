@@ -6,17 +6,145 @@ const Service = () => {
   const [showDocumentInput, setShowDocumentInput] = useState(false);
   const [formData, setFormData] = useState({
     category_id: "",
-    name: "", 
+    name: "",
     description: "",
     price: "",
   });
 
+  const [services, setServices] = useState([]); // State to store services for the selected category
+
+  const categories = [
+    {
+      id: "1",
+      name: "Services Ménagers",
+      services: [
+        "Nettoyage général des espaces",
+        "Lavage des vitres et des tapis",
+        "Organisation et rangement des pièces",
+        "Courses et approvisionnement",
+        "Préparation de repas à domicile",
+        "Nettoyage après un événement ou un déménagement",
+        "Entretien des appareils électroménagers",
+        "Dépoussiérage approfondi",
+        "Entretien des textiles (rideaux, tapis, matelas)",
+      ],
+    },
+    {
+      id: "2",
+      name: "Services de Bricolage",
+      services: [
+        "Travaux de menuiserie et réparations en bois",
+        "Petits travaux de soudure",
+        "Pose et réparation de structures en aluminium",
+        "Assemblage et montage de meubles",
+        "Installation de luminaires et d’équipements électriques",
+        "Peinture intérieure et petits travaux de rénovation",
+        "Installation de tringles à rideaux, étagères ou cadres",
+        "Plomberie",
+      ],
+    },
+    {
+      id: "3",
+      name: "Services de Jardinage",
+      services: [
+        "Taille des haies et élagage",
+        "Plantation et entretien des fleurs et arbustes",
+        "Nettoyage et désherbage des espaces verts",
+        "Création et entretien de potagers",
+        "Aménagement paysager sur mesure",
+        "Installation de systèmes d’arrosage automatique",
+        "Décoration extérieure pour événements",
+      ],
+    },
+    {
+      id: "4",
+      name: "Services de Bien-Être",
+      services: [
+        "Massages relaxants à domicile",
+        "Soins capillaires et coiffures",
+        "Maquillage pour événements ou quotidien",
+        "Manucure et pédicure",
+        "Hijama (ventousothérapie traditionnelle)",
+        "Séances de yoga ou relaxation guidée",
+      ],
+    },
+    {
+      id: "5",
+      name: "Services pour Enfants",
+      services: [
+        "Garde d’enfants à domicile",
+        "Soutien scolaire et aide aux devoirs",
+        "Organisation d’activités éducatives et ludiques",
+        "Animation d’anniversaires et d’ateliers créatifs",
+        "Cours d’initiation en musique, dessin ou langues",
+      ],
+    },
+    {
+      id: "6",
+      name: "Services pour Personnes Âgées",
+      services: [
+        "Assistance pour les repas, les courses et le ménage",
+        "Compagnie et conversation",
+        "Accompagnement pour rendez-vous médicaux",
+        "Aide aux démarches administratives simples",
+        "Organisation d’activités adaptées pour le bien-être",
+      ],
+    },
+    {
+      id: "7",
+      name: "Services Technologiques",
+      services: [
+        "Réparation d’ordinateurs, smartphones et tablettes",
+        "Installation de télévisions, Wi-Fi et équipements électroniques",
+        "Assistance informatique à distance",
+        "Maintenance et installation de climatiseurs",
+        "Configuration d’objets connectés",
+        "Formation de base en informatique pour débutants",
+      ],
+    },
+    {
+      id: "8",
+      name: "Transport et Livraison",
+      services: [
+        "Déménagement avec emballage et transport sécurisé",
+        "Transport de colis, meubles ou biens fragiles",
+        "Livraison de courses ou achats spécifiques",
+        "Location de véhicule avec chauffeur pour petits trajets",
+      ],
+    },
+    {
+      id: "9",
+      name: "Services Animaliers",
+      services: [
+        "Promenade régulière pour chiens",
+        "Garde d’animaux à domicile ou en pension",
+        "Toilettage complet pour animaux de compagnie",
+        "Éducation canine et conseils en comportement",
+        "Nutrition et soins spécifiques pour animaux",
+      ],
+    },
+    {
+      id: "10",
+      name: "Soutien Scolaire et Coaching",
+      services: [
+        "Cours particuliers (musique, langues, matières scolaires)",
+        "Coaching sportif et remise en forme",
+        "Développement personnel et gestion du stress",
+        "Ateliers de méthodologie et préparation aux examens",
+        "Soutien scolaire pour enfants en difficulté",
+      ],
+    },
+  ];
   const handleCategoryChange = (e) => {
     const selectedCategory = e.target.value;
     setFormData({ ...formData, category_id: selectedCategory });
 
-    if (
-      selectedCategory === "10" || selectedCategory === "5" ) {
+    // Update services based on the selected category
+    const selectedCategoryData = categories.find((cat) => cat.id === selectedCategory);
+    setServices(selectedCategoryData ? selectedCategoryData.services : []);
+
+    // Show document input for specific categories
+    if (selectedCategory === "10" || selectedCategory === "5") {
       setShowDocumentInput(true);
     } else {
       setShowDocumentInput(false);
@@ -34,18 +162,18 @@ const Service = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Prepare the data as JSON
     const data = {
       name: formData.name,
       description: formData.description,
       price: parseFloat(formData.price), // Ensure price is a number
-      provider_id: localStorage.getItem('userId'), // Hardcoded provider_id
+      provider_id: localStorage.getItem("userId"), // Hardcoded provider_id
       category_id: parseInt(formData.category_id, 10), // Ensure category_id is a number
     };
-  
+
     console.log("Request data:", data);
-  
+
     try {
       // Send POST request to the backend API
       const response = await fetch("http://localhost:8081/api/services", {
@@ -55,16 +183,16 @@ const Service = () => {
         },
         body: JSON.stringify(data), // Convert the data to JSON
       });
-  
+
       // Log the response for debugging
       console.log("Response status:", response.status);
       const result = await response.json();
       console.log("Response data:", result);
-  
+
       if (!response.ok) {
         throw new Error("Failed to submit service");
       }
-  
+
       // Optionally, reset the form after successful submission
       setFormData({
         category_id: "",
@@ -96,30 +224,32 @@ const Service = () => {
                   <Label htmlFor="Catégories" value="Catégories*" />
                 </div>
                 <Select id="Catégories" required onChange={handleCategoryChange}>
-                  <option value="1">Services Ménagers</option>
-                  <option value="2">Services de Bricolage</option>
-                  <option value="3">Services de Jardinage</option>
-                  <option value="4">Services de Bien-Être</option>
-                  <option value="5">Services pour Enfants</option>
-                  <option value="6">Services pour Personnes Âgées</option>
-                  <option value="7">Services Technologiques</option>
-                  <option value="8">Transport et Livraison</option>
-                  <option value="9">Services Animaliers</option>
-                  <option value="10">Soutien Scolaire et Coaching</option>
+                  <option value="">Sélectionnez une catégorie</option>
+                  {categories.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </option>
+                  ))}
                 </Select>
               </div>
 
               <div className="w-full mb-4">
                 <div className="mb-2 block">
-                  <Label htmlFor="name" value="Services*" /> {/* Changed from "service" to "name" */}
+                  <Label htmlFor="name" value="Services*" />
                 </div>
-                <input
-                  type="text"
-                  id="name" // Changed from "service" to "name"
+                <Select
+                  id="name"
                   className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   required
                   onChange={handleInputChange}
-                />
+                >
+                  <option value="">Sélectionnez un service</option>
+                  {services.map((service, index) => (
+                    <option key={index} value={service}>
+                      {service}
+                    </option>
+                  ))}
+                </Select>
               </div>
 
               {showDocumentInput && (
